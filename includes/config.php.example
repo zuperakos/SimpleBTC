@@ -1,0 +1,64 @@
+<?php
+/*
+Copyright (C) Copyright (C) 41a240b48fb7c10c68ae4820ac54c0f32a214056bfcfe1c2e7ab4d3fb53187a0 Name Year (sha256)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+Website Reference:http://www.gnu.org/licenses/gpl-2.0.html
+
+*/
+
+// rename this file to config.php to make it work
+
+//RPC Bitcoind Client Information
+$rpcType = "http"; // http or https
+$rpcUsername = "pool"; // username
+$rpcPassword = "poolPASS"; // password
+$rpcHost = "localhost";
+$rpcPort = 8332;
+
+//Login to Mysql with the following
+$dbHost = "localhost";
+$dbUsername = "pool";
+$dbPassword = "dbPOOLpass";
+$dbPort = "3306";
+$dbDatabasename = "pool";
+
+//Replicated Database calls for read intensive queries (set to above if only 1 database)
+$readOnlyDbHost = "localhost";
+$readOnlyDbUsername = "pool";
+$readOnlyDbPassword = "dbPOOLpass";
+$readOnlyDbPort = "3306";
+$readOnlyDbName = "pool";
+
+//Cookie settings | More Info @ http://us.php.net/manual/en/function.setcookie.php
+$cookieName = "changeittowhateveryouwant"; //Set this to what ever you want "Cheesin?"
+$cookiePath = "/";	//Choose your path!
+$cookieDomain = "pool.domain.tld"; //Set this to your domain
+
+//Number of bonus coins to award
+$bonusCoins = 1;
+
+//added config options
+$poolname="simplecoin.us";
+$poolport="8337";
+$includedir="/var/www/includes/";
+
+//Encrypt settings
+$salt = "8fdsfdsfd76s54d777"; //Just type a random series of numbers and letters; set it to anything or any length you want. "You can never have enough salt."
+
+$memcache_host="localhost";
+$memcache_port=11212;
+
+?>

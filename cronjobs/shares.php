@@ -16,9 +16,7 @@
 
 // 	  BTC Donations: 163Pv9cUDJTNUbadV4HMRQSSj3ipwLURRc
 
-$includeDirectory = "/var/www/includes/";
-
-include($includeDirectory."requiredFunctions.php");
+include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
 	
 //Check that script is run locally
 ScriptIsRunLocally();

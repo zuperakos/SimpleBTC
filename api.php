@@ -19,9 +19,7 @@
 if (!isset($_GET["api_key"]))
 	exit;
 	
-$includeDirectory = "/var/www/includes/";
-
-include($includeDirectory."requiredFunctions.php");
+include(dirname(__FILE__) . "/include/requiredFunctions.php");
 include($includeDirectory."stats.php");
 $stats = new Stats();
 

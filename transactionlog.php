@@ -1,9 +1,7 @@
 <?php 
 //Set page starter variables//
-$includeDirectory = "/var/www/includes/";
-
 //Include site functions
-include($includeDirectory."requiredFunctions.php");
+include(dirname(__FILE__) . "/include/requiredFunctions.php");
 
 //Open a bitcoind connection
 $transactions = $bitcoinController->query("listtransactions");

@@ -79,7 +79,7 @@ class Stats {
 				$currenthashrate = round((($currenthashrate*4294967296)/590)/1000000, 0);
 				setCache("pool_hashrate", $currenthashrate, 300);
 				try {
-					$fileName = "/var/www/api/pool/speed";
+					$fileName = $apidir."pool/speed";
 					$fileHandle = fopen($fileName, 'w');
 					fwrite($fileHandle, ($currenthashrate/1000));
 					fclose($fileHandle);

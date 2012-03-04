@@ -18,10 +18,8 @@
 // 	  BTC Donations: 163Pv9cUDJTNUbadV4HMRQSSj3ipwLURRc
  
 //Set page starter variables//
-$includeDirectory = "/var/www/includes/";
-
 //Include hashing functions
-include($includeDirectory."requiredFunctions.php");
+include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
 
 //Check that script is run locally
 ScriptIsRunLocally();

@@ -18,70 +18,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Website Reference:http://www.gnu.org/licenses/gpl-2.0.html
 
 */
+include( dirname(__FILE__) . "/config.php");
 
-//RPC Bitcoind Client Information
-$rpcType = "http"; // http or https
-$rpcUsername = "pool"; // username
-$rpcPassword = "pass"; // password
-$rpcHost = "localhost";
-$rpcPort = 8332;
+include(dirname(__FILE__) . "/bitcoinController/bitcoin.inc.php");
 
-
-//Login to Mysql with the following
-$dbHost = "localhost";
-$dbUsername = "pushpool";
-$dbPassword = "pass";
-$dbPort = "3306";
-$dbDatabasename = "simplecoin";
-
-//Replicated Database calls for read intensive queries (set to above if only 1 database)
-$readOnlyDbHost = "1.1.1.1";
-$readOnlyDbUsername = "pushpool";
-$readOnlyDbPassword = "pass";
-$readOnlyDbPort = "3306";
-$readOnlyDbName = "simplecoin";
-
-//Cookie settings | More Info @ http://us.php.net/manual/en/function.setcookie.php
-$cookieName = "simplecoinus"; //Set this to what ever you want "Cheesin?"
-$cookiePath = "/";	//Choose your path!
-$cookieDomain = ""; //Set this to your domain
-
-//Number of bonus coins to award
-$bonusCoins = 50;
-
-//Include bitcoind controller
-include("bitcoinController/bitcoin.inc.php");
-
-//Setup Memcached 
+$cookieValid = false; //Don't touch leave as: false
 global $memcache;
 $memcache = new Memcached();
-$memcache->addServer("localhost",11212);
+$memcache->addServer($memcache_host,$memcache_port);
 
-//Encrypt settings
-$salt = "123483jd7Dg6h5s92k"; //Just type a random series of numbers and letters; set it to anything or any length you want. "You can never have enough salt."
+connectToDb();
+include('settings.php');
+
+$settings = new Settings();
 
 /////////////////////////////////////////////////////////////////////NO NEED TO MESS WITH THE FOLLOWING | FOR DEVELOPERS ONLY///////////////////////////////////////////////////////////////////
 
-$cookieValid = false; //Don't touch leave as: false
-
-//Connect to Main Db
-connectToDb();
-
-//New PDO connection for readaccess (fallback to local if unavailable)
-try {
-	$read_only_db = new PDO('mysql:dbname='.$readOnlyDbName.';host='.$readOnlyDbHost.';port='.$readOnlyDbPort, $readOnlyDbUsername, $readOnlyDbPassword);
-} catch (Exception $e) {
-	$read_only_db = new PDO('mysql:dbname='.$dbDatabasename.';host='.$dbHost.';port='.$dbPort, $dbUsername, $dbPassword);
-}
-
-include('settings.php');
-$settings = new Settings();
-
-//Open a bitcoind connection	
-$bitcoinController = new BitcoinClient($rpcType, $rpcUsername, $rpcPassword, $rpcHost, $rpcPort);
-
-//setup bitcoinDifficulty cache object
-$bitcoinDifficulty = GetCachedBitcoinDifficulty();
+$timeoutStamp=1;
 
 function connectToDb(){
 	//Set variables to global retireve outside of the scope
@@ -141,6 +94,8 @@ class checkLogin
 	}
 }
 
+
+
 function outputPageTitle(){
 	if (!isset($settings))
 	{
@@ -177,106 +132,4 @@ function antiXss($input) {
 	//strip HTML tags from input data
 	return htmlentities(strip_tags($input), ENT_QUOTES);
 }
-
-function sqlerr($file = '', $line = '')
-{
-  print("<table border=0 bgcolor=blue align=left cellspacing=0 cellpadding=10 style='background: blue'>" .
-    "<tr><td class=embedded><font color=white><h1>SQL Error</h1>\n" .
-  "<b>" . mysql_error() . ($file != '' && $line != '' ? "<p>in $file, line $line</p>" : "") . "</b></font></td></tr></table>");
-  die;
-}
-
-$_current_lock = null;
-
-function islocked($name) {
-	$result = mysql_query("SELECT locked FROM locks WHERE name ='$name' and locked=1 LIMIT 1");
-	if (!$result || mysql_numrows($result) == 0)
-		return false;
-	return true;
-}
-
-function unlock() {
-	global $_current_lock;
-	mysql_query("UNLOCK TABLES");
-	$sql = "UPDATE locks SET locked = 0 WHERE name = '" . mysql_real_escape_string($_current_lock) . "'";
-	mysql_query($sql);
-}
-
-function lock($name) {
-	global $_current_lock;
-	mysql_query("LOCK TABLES locks WRITE");
-	$q = mysql_query("SELECT locked FROM locks WHERE name = '" . mysql_real_escape_string($name) . "'");
-
-	$lock = mysql_fetch_object($q);
-	if ($lock === false) {
-		mysql_query("INSERT INTO locks (name, locked) VALUES ('".mysql_real_escape_string($name)."', 1)");
-	} elseif ($lock->locked) {
-		echo("Lock already held, exiting. (".$name.")");
-		mysql_query("UNLOCK TABLES");
-		exit();
-		return;
-	} else {		
-		mysql_query("UPDATE locks SET locked = 1 WHERE name = '" . mysql_real_escape_string($name) . "'");
-	}
-	
-	//mysql_query("UNLOCK TABLES");
-	$_current_lock = $name;
-	register_shutdown_function('unlock');
-}
-
-function ScriptIsRunLocally() {
-	if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
-		echo "This script can only be run locally.";
-		exit;
-	}
-}
-
-//Cache functions
-
-# Gets key / value pair into memcache ... called by mysql_query_cache()
-function getCache($key) {
-    global $memcache;
-    return ($memcache) ? $memcache->get($key) : false;
-}
-
-# Puts key / value pair into memcache ... called by mysql_query_cache()
-function setCache($key, $object, $timeout = 600) {
-    global $memcache;
-    return ($memcache) ? $memcache->set($key, $object, $timeout) : false;
-}
-
-function removeCache($key) {
-	global $memcache;
-	$memcache->delete($key);
-}
-
-function removeSqlCache($key) {
-	global $memcache;
-	$memcache->delete(md5("mysql_query".$key));
-}
-
-# Caching version of mysql_query()
-function mysql_query_cache($sql, $timeout = 600) {	
-	if($objResultset = unserialize(getCache(md5("mysql_query".$sql))))  {		
-    	return $objResultset;
-  	}
-    $objResultSet = mysql_query($sql); 
-    $objarray = Array();
-    while ($row = mysql_fetch_object($objResultSet)) {
-    	$objarray[] = $row;
-    }   
-    setCache(md5("mysql_query".$sql), serialize($objarray), $timeout);
-    return $objarray;
-}
-
-function GetCachedBitcoinDifficulty() {
-	global $bitcoinController;
-	$difficulty = 0;
-	if (!($difficulty = getCache("bitcoinDifficulty"))) {	
-		$difficulty = $bitcoinController->query("getdifficulty");
-		setCache("bitcoinDifficulty", $difficulty, 60);	
-	}	
-	return $difficulty;
-}
-
 ?>
