@@ -128,6 +128,10 @@ function outputHeaderTitle(){
 	return $settings->getsetting("websitename");
 }
 
+function sqlesc($x) {
+   return "'".mysql_escape_string($x)."'";
+   }
+
 //Helpfull functions
 function genRandomString($length=10) {
     $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

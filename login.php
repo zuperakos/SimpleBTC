@@ -32,15 +32,16 @@ $pass = mysql_real_escape_string($_POST["password"]);
 //Check the supplied username & password with the saved username & password
 $checkPassQ = mysql_query("SELECT id, secret, pass, accountLocked, accountFailedAttempts FROM webUsers WHERE username = '".$user."' LIMIT 0,1");
 $checkPass = mysql_fetch_object($checkPassQ);
-$userExists = $checkPass->id;
+if ( $checkPass ) $userExists = $checkPass->id;
 
-if($checkPass->accountFailedAttempts >= 5){
+if ( $checkPass ) if($checkPass->accountFailedAttempts >= 5){
 	echo "Account has been banned";
 	die();
 }
 
 
 //Check if user exists before checking login data
+if ( isset( $userExists ) )
 if($userExists > 0){
 	//Check to see if this user has an `accountLocked`
 	if($checkPass->accountLocked < time()){
@@ -76,6 +77,7 @@ if($userExists > 0){
 }else{
 	$outputMessage = "User name dosent exist!";
 }
+if ( !isset( $outputMessage ) ) $outputMessage = "User name dosent exist!";
 ?>
 <html>
   <head>

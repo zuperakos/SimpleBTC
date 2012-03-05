@@ -1,8 +1,11 @@
 <?php
 include ("includes/header.php");
+//include ("includes/requiredFunctions.php");
 	
 $goodMessage = "";
 $returnError = "";
+$action = "";
+
 //Scince this is the Admin panel we'll make sure the user is logged in and "isAdmin" enabled boolean; If this is not a logged in user that is enabled as admin, redirect to a 404 error page
 
 if(!$cookieValid || $isAdmin != 1) {
@@ -10,7 +13,8 @@ if(!$cookieValid || $isAdmin != 1) {
 	exit;
 }
 
-$action = $_POST["action"];
+if ( isset( $_POST["action"] ) ) $action = $_POST["action"];
+
 if($action == "news") {
 	$title = $_POST["title"];
 	$title = sqlesc($title);
@@ -18,7 +22,9 @@ if($action == "news") {
 	$news = sqlesc($news);
 	$currentTime = time();
 
-	mysql_query("INSERT INTO news (title,message) VALUES ('$title','$news')") or sqlerr(__FILE__, __LINE__);
+	$query="INSERT INTO news (title,message) VALUES ($title,$news)";
+	//echo $query;
+	mysql_query($query) or sqlerr(__FILE__, __LINE__);
 }
 
 $res = mysql_query("SELECT title, message  FROM news WHERE id = 1");
