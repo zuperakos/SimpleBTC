@@ -21,7 +21,7 @@
 include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
 
 //Include Reward class
-include($includeDirectory.'reward.php');
+include($includedir.'reward.php');
 $reward = new Reward();
 
 //Check that script is run locally
@@ -30,7 +30,7 @@ ScriptIsRunLocally();
 lock("shares");
 
 	//Include Block class
-	include($includeDirectory."block.php");
+	include($includedir."block.php");
 	$block = new Block();
 	
 	//Get current block number
@@ -43,7 +43,7 @@ lock("shares");
 	//Do block work if new block 
 	if ($latestDbBlock < $lastBlockNumber) {		
 		//Insert last block number into networkBlocks
-		include($includeDirectory."stats.php");
+		include($includedir."stats.php");
 		$stats = new Stats();
 		$lastwinningid = $stats->lastWinningShareId();
 		$block->InsertNetworkBlocks($lastBlockNumber, $lastwinningid);

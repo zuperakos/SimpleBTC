@@ -54,6 +54,7 @@ $bonusCoins = 1;
 $poolname="simplecoin.us";
 $poolport="8337";
 $includedir="/var/www/includes/";
+$backupwalletfilename="/home/simplecoin/walletbackup/wallet.dat";
 
 //Encrypt settings
 $salt = "8fdsfdsfd76s54d777"; //Just type a random series of numbers and letters; set it to anything or any length you want. "You can never have enough salt."

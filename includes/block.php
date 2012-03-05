@@ -3,6 +3,7 @@ class Block {
 	
 	function getLatestDbBlockNumber() {		
 		$result = mysql_query("SELECT blockNumber FROM networkBlocks ORDER BY blockNumber DESC LIMIT 1");
+		if ($result )
 		if ($row = mysql_fetch_row($result)) { 
 			if (count($row) > 0) 
 				return $row[0];
@@ -13,7 +14,9 @@ class Block {
 	function InsertNetworkBlocks($lastBlockNumber,$lastwinningid) {		
 		//Check to see if last block number exists in the db.		
 		$inDatabaseQ = mysql_query("SELECT id FROM networkBlocks WHERE blockNumber = $lastBlockNumber LIMIT 0,1");
+		if ( $inDatabaseQ )
 		$inDatabase = mysql_num_rows($inDatabaseQ);
+		if ( isset( $inDatabase ) )
 		if(!$inDatabase) {
 			//If not, insert it.
 			$currentTime = time();
@@ -21,6 +24,7 @@ class Block {
 			
 			//Save winning share (if there is one)
 			$winningShareQ = mysql_query("SELECT id, username FROM shares where upstream_result = 'Y' AND id > $lastwinningid");
+			if ( $winningShareQ )
 			while ($winningShareR = mysql_fetch_object($winningShareQ)) {		
 				mysql_query("INSERT INTO winning_shares (blockNumber, username, share_id) VALUES ($lastBlockNumber,'$winningShareR->username',$winningShareR->id)");
 				removeCache("last_winning_share_id");
@@ -30,6 +34,7 @@ class Block {
 
 	function UpdateConfirms($bitcoinController) {	
 		$winningAccountQ = mysql_query("SELECT id, txid FROM winning_shares WHERE txid <> '' AND confirms < 120");
+		if ( $winningAccountQ )
 		while ($winningAccountR = mysql_fetch_object($winningAccountQ)) {
 			$txInfo = $bitcoinController->query("gettransaction", $winningAccountR->txid);
 			if (count($txInfo["confirmations"]) > 0) {
@@ -100,9 +105,13 @@ class Block {
 			}						
 		} else {
 			$result = mysql_query("SELECT count(s.id) FROM shares s, (SELECT max(share_id) as share_id FROM winning_shares WHERE rewarded='Y') w WHERE s.id < w.share_id");
-			$row = mysql_fetch_row($result);
-			if ($row[0] > 0) 
+			if ( $result )
+			{
+			 $row = mysql_fetch_row($result);
+			 if ($row[0] > 0) 
 				return true;
+			}
+			else return false;
 		}
 		return false;
 	}

@@ -20,7 +20,7 @@ if (!isset($_GET["api_key"]))
 	exit;
 	
 include(dirname(__FILE__) . "/include/requiredFunctions.php");
-include($includeDirectory."stats.php");
+include($includedir."stats.php");
 $stats = new Stats();
 
 class User {
