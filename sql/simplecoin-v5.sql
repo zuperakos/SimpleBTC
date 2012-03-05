@@ -307,7 +307,7 @@ CREATE TABLE `webUsers` (
   `admin` int(1) NOT NULL,
   `username` varchar(40) NOT NULL,
   `pass` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL COMMENT 'Assocaited email: used for validating users, and re-setting passwords',
+  `email` varchar(255) NOT NULL COMMENT 'Associated email: used for validating users, and re-setting passwords',
   `emailAuthPin` varchar(10) NOT NULL COMMENT 'The pin required to authorize that email address',
   `secret` varchar(10) NOT NULL,
   `loggedIp` varchar(255) NOT NULL,

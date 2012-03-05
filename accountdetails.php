@@ -248,7 +248,7 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 	<?php if (!$userBtcLock) { ?><tr><td colspan="2"><input type="checkbox" name="cbxLock" value="1" /> Permanently lock Bitcoin address to this account</td></tr><?php } ?>
 	<tr><td>Donation %: </td><td><input type="text" name="donatePercent" value="<?php echo antiXss($donatePercent);?>" size="4"></td></tr>
 	<tr><td>Automatic Payout: <br />(1-25 BTC, 0 for manual)</td><td valign="top"><input type="text" name="payoutThreshold" value="<?php echo antiXss($payoutThreshold);?>" size="2" maxlength="2"></td></tr>
-	<tr><td>Authorize Pin: </td><td><input type="password" name="authPin" size="4" maxlength="4"></td></tr>
+	<tr><td>Authorize Pin: </td><td><input type="password" name="authPin" size="4" maxlength="4" autocomplete="off"></td></tr>
 </table>
 <input type="submit" value="Update Account Settings"></form>
 <br />
@@ -260,7 +260,7 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 <table>
 	<tr><td>Account Balance: </td><td><?php echo antiXss($currentBalance); ?></td></tr>
 	<tr><td>Payout to: </td><td><?php echo antiXss($paymentAddress); ?></td></tr>
-	<tr><td>Authorize Pin: </td><td><input type="password" name="authPin" size="4" maxlength="4"></td></tr>
+	<tr><td>Authorize Pin: </td><td><input type="password" name="authPin" size="4" maxlength="4" autocomplete="off"></td></tr>
 </table>
 <input type="submit" value="Cash Out"></form>
 <br />
@@ -269,9 +269,9 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 <b><u>Change Password</u></b><br/>
 <form action="/accountdetails.php" method="post"><input type="hidden" name="act" value="updatePassword">
 <table>
-	<tr><td>Current Password: </td><td><input type="password" name="currentPassword"></td></tr>
-	<tr><td>New Password: </td><td><input type="password" name="newPassword"></td></tr>
-	<tr><td>New Password Repeat: </td><td><input type="password" name="newPassword2"></td></tr>
+	<tr><td>Current Password: </td><td><input type="password" name="currentPassword" autocomplete="off"></td></tr>
+	<tr><td>New Password: </td><td><input type="password" name="newPassword" autocomplete="off" ></td></tr>
+	<tr><td>New Password Repeat: </td><td><input type="password" name="newPassword2" autocomplete="off"></td></tr>
 	<tr><td>Authorize Pin: </td><td><input type="password" name="authPin" size="4"	maxlength="4"></td></tr>
 </table>
 <span style="text-decoration: underline;">(You will be redirected to the login screen upon success)</span> <br />
@@ -313,7 +313,7 @@ while($worker = mysql_fetch_array($getWorkers)){
 	name="authPin" size="4" maxlength="4"><br /> -->
 <?php echo antiXss($userInfo->username);?>.<input type="text" name="username"
 	value="user" size="10" maxlength="20"> &middot; <input type="text"
-	name="pass" value="pass" size="10" maxlength="20"> <input type="submit"
+	name="pass" value="pass" size="10" maxlength="20" autocomplete="off"> <input type="submit"
 	value="Add worker"></form>
 
 <br />
