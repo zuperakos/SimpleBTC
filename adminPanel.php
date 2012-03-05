@@ -91,7 +91,7 @@ echo "<span class=\"returnMessage\">".antiXss($returnError)."</span>";
 	<h3>Info</h3>
 	<hr size="1" width="80%"></hr>
 
-	<? 
+	<?php 
 
 	$sitewallet = mysql_query("SELECT sum(balance) FROM `accountBalance` WHERE `balance` > 0")or sqlerr(__FILE__, __LINE__);
 	$sitewalletq = mysql_fetch_row($sitewallet);

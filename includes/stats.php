@@ -1,5 +1,7 @@
 <?php
 
+require_once ( dirname(__FILE__) . "/config.php");
+
 class Stats {
 	function previousRoundSharesInShares() {
 		//don't cache 0/1 or true/false
@@ -8,6 +10,7 @@ class Stats {
 		if (!($retval = getCache("previousRoundSharesInShares"))) {
 			$sql = "SELECT s.id FROM shares s, winning_shares w WHERE s.id = w.share_id";
 			$result = $read_only_db->query($sql);
+			if ( $result )
 			if ($row = $result->fetch()) 
 				$retval = "old";			
 			setCache("previousRoundSharesInShares", $retval, 300);
@@ -70,6 +73,7 @@ class Stats {
 
 	function currenthashrate() {
 		global $read_only_db;
+		global $apidir;
 		$currenthashrate = 0;
 		if (!($currenthashrate = getCache("pool_hashrate"))) {
 			$sql =  "SELECT count(*) as id FROM shares WHERE time > DATE_SUB(now(), INTERVAL 10 MINUTE) ";
@@ -96,6 +100,7 @@ class Stats {
 		global $read_only_db;
 		$efficiency = 0.0;
 		if (!($efficiency = getCache("pool_efficiency"))) {
+			if ( $this->currentshares() >0 )
 			$efficiency = (1 - ($this->currentstales()/$this->currentshares())) * 100;
 			if ($efficiency > 0)
 				setCache("pool_efficiency", $efficiency, 600);		
@@ -107,6 +112,7 @@ class Stats {
 		$currentworkers = 0;		
 		if (!($currentworkers = getCache("pool_workers"))) {
 			$uwa = $this->workerhashrates();
+			if ( $uwa )
 			foreach ($uwa as $key => $value) {
 				if ($value > 0)
 					$currentworkers += 1;				
@@ -134,6 +140,7 @@ class Stats {
 		$shareid = 0;
 		if (!($shareid = getCache("last_winning_share_id"))) {
 			$result = $read_only_db->query("SELECT max(share_id) FROM winning_shares");
+			if ( $result )
 			if ($row = $result->fetch()) {
 				$shareid = $row[0];				
 			}			
@@ -163,6 +170,7 @@ class Stats {
 		$uwa = Array();
 		if (!($uwa = getCache("last_winning_blocks"))) {
 			$result = $read_only_db->query("SELECT w.username, w.blockNumber, w.confirms, n.timestamp FROM winning_shares w, networkBlocks n WHERE w.blockNumber = n.blockNumber ORDER BY w.blockNumber DESC LIMIT ".$limit);
+			if ( $result )
 			while ($row = $result->fetch()) {
 				$uwa[$i] = Array();
 				$uwa[$i][0] = $row[0];
@@ -209,6 +217,7 @@ class Stats {
 	function workerhashrate($workername) {
 		$workerhashrate = 0;
 		$uwa = $this->workerhashrates();
+		if ( $uwa )
 		if (array_key_exists($workername, $uwa)) {
 			$workerhashrate = $uwa[$workername];
 		}
@@ -253,6 +262,7 @@ class Stats {
 	function userhashratesbyid() {
 		$uhr = Array();
 		$uwa = $this->userhashrates();
+		if ( $uwa )
 		foreach ($this->username_userid_array() as $username => $userid) {
 			if (array_key_exists($username, $uwa))
 				$uhr[$userid] = $uwa[$username];
@@ -265,6 +275,7 @@ class Stats {
 	function userhashrate($username) {
 		$userhashrate = 0;
 		$uwa = $this->userhashrates();
+		if ( $uwa )
 		if (array_key_exists($username, $uwa)) {
 			$userhashrate = $uwa[$username];
 		}

@@ -30,11 +30,24 @@ $memcache->addServer($memcache_host,$memcache_port);
 connectToDb();
 include('settings.php');
 
+//New PDO connection for readaccess (fallback to local if unavailable)
+try {
+$read_only_db = new PDO('mysql:dbname='.$readOnlyDbName.';host='.$readOnlyDbHost.';port='.$readOnlyDbPort, $readOnlyDbUsername, $readOnlyDbPassword);
+} catch (Exception $e) {
+$read_only_db = new PDO('mysql:dbname='.$dbDatabasename.';host='.$dbHost.';port='.$dbPort, $dbUsername, $dbPassword);
+}
+
 $settings = new Settings();
 
 /////////////////////////////////////////////////////////////////////NO NEED TO MESS WITH THE FOLLOWING | FOR DEVELOPERS ONLY///////////////////////////////////////////////////////////////////
 
-$timeoutStamp=1;
+//Open a bitcoind connection
+$bitcoinController = new BitcoinClient($rpcType, $rpcUsername, $rpcPassword, $rpcHost, $rpcPort);
+
+//setup bitcoinDifficulty cache object
+$bitcoinDifficulty = GetCachedBitcoinDifficulty();
+
+//$timeoutStamp=1;
 
 function connectToDb(){
 	//Set variables to global retireve outside of the scope
@@ -217,6 +230,7 @@ function mysql_query_cache($sql, $timeout = 600) {
   	}
     $objResultSet = mysql_query($sql); 
     $objarray = Array();
+    if ( $objResultSet )
     while ($row = mysql_fetch_object($objResultSet)) {
     	$objarray[] = $row;
     }   

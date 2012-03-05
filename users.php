@@ -10,8 +10,10 @@ if(!$cookieValid || $isAdmin != 1) {
 	header('Location: /');
 	exit;
 }
-	$show = $_GET['show'];
-	$searchUsername = $_POST['searchUsername'];
+	if ( isset( $_GET['show'] ) ) { $show = $_GET['show']; }
+	else  $show =""; 
+	if ( isset( $_POST['searchUsername'] ) ) $searchUsername = $_POST['searchUsername'];
+	else $searchUsername="";
 
 if($show == ""){
 ?>
@@ -79,7 +81,7 @@ if($show == "searchUsers"){
 				<?php
 					}
 					//Output Footer
-					include($footer);
+					if ( isset ( $footer ) ) include($footer);
 					///////////////
 				?>
 			</div>

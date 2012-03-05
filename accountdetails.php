@@ -288,8 +288,8 @@ $getWorkers = mysql_query("SELECT id, username, password FROM pool_worker WHERE 
 while($worker = mysql_fetch_array($getWorkers)){
 ?>
 <form action="/accountdetails.php" method="post">
-<input type="hidden" name="workerId" value="<?=$worker["id"]?>">
-<?
+<input type="hidden" name="workerId" value="<?php echo $worker["id"]?>">
+<?php
 	//Display worker information and the forms to edit or update them
 	$splitUsername = explode(".", $worker["username"]);
 	$realUsername = $splitUsername[1];

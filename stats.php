@@ -24,6 +24,7 @@
 //    May the force be with you.
 
 $pageTitle = "- Stats";
+include ("includes/config.php");
 include ("includes/header.php");
 
 
@@ -72,6 +73,7 @@ $result = $stats->userhashrates();
 $rank = 1;
 $user_found = false;
 
+if ( $result )
 foreach ($result as $username => $user_hash_rate) {
 	//$username = $resultrow->username;
 	if ($cookieValid && $username == $userInfo->username) {
@@ -209,6 +211,7 @@ echo "<tr><td class=\"leftheader\">Pool Efficiency</td><td><span class=\"green\"
 
 $res = $stats->userhashrates();
 $hashcount = 0;
+if ( $res )
 foreach ($res as $hash)
 	if ($hash > 0) 
 		$hashcount++;
@@ -274,6 +277,7 @@ echo "<table class=\"stats_table server_width top_spacing\">";
 echo "<tr><th scope=\"col\" colspan=\"4\">Last $last_no_blocks_found Blocks Found - <a href=\"blocks.php\">All Blocks Found</a></th></tr>";
 echo "<tr><th scope=\"col\">Block</th><th scope=\"col\">Confirms</th><th scope=\"col\">Finder</th><th scope=\"col\">Time</th></tr>";
 
+if ( $lastblocks )
 foreach ($lastblocks as $resultrow) {
 	echo "<tr>";
 	$splitUsername = explode(".", $resultrow[0]);

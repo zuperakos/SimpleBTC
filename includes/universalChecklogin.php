@@ -36,7 +36,9 @@ if(isSet($_COOKIE[$cookieName])){
 	}	
 
 	//Get user information
-	$userInfoQ = mysql_query("SELECT id, username, email, pin, pass, admin, api_key, IFNULL(donate_percent, '0') as donate_percent, btc_lock FROM webUsers WHERE id = $userId LIMIT 0,1"); 	
+	$query="SELECT id, username, email, pin, pass, admin, api_key, IFNULL(donate_percent, '0') as donate_percent, btc_lock FROM webUsers WHERE id = $userId LIMIT 0,1";
+	//echo $query;
+	$userInfoQ = mysql_query($query); 	
 	if ($userInfo = mysql_fetch_object($userInfoQ)) {
 		$authPin = $userInfo->pin;
 		$hashedPass = $userInfo->pass;
