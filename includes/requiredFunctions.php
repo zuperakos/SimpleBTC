@@ -182,7 +182,7 @@ function lock($name) {
 	$lock = mysql_fetch_object($q);
 	if ($lock === false) {
 		mysql_query("INSERT INTO locks (name, locked) VALUES ('".mysql_real_escape_string($name)."', 1)");
-	} elseif ($lock->locked) {
+	} elseif ($lock->locked == 1 ) {
 		echo("Lock already held, exiting. (".$name.")");
 		mysql_query("UNLOCK TABLES");
 		exit();

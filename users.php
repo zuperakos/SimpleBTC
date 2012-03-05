@@ -10,12 +10,12 @@ if(!$cookieValid || $isAdmin != 1) {
 	header('Location: /');
 	exit;
 }
-	if ( isset( $_GET['show'] ) ) { $show = $_GET['show']; }
+	$show = (isset($_GET['show']) ? $_GET['show'] : 'main');
 	else  $show =""; 
 	if ( isset( $_POST['searchUsername'] ) ) $searchUsername = $_POST['searchUsername'];
 	else $searchUsername="";
 
-if($show == ""){
+if($show == "main"){
 ?>
 					<h2 style="text-decoration:underline;">Search for a user (% = Wildcard)</h2>
 						<form action="?show=searchUsers" method="post">
