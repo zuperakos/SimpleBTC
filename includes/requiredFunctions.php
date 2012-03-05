@@ -129,7 +129,7 @@ function outputHeaderTitle(){
 }
 
 function sqlesc($x) {
-   return "'".mysql_escape_string($x)."'";
+   return "'".mysql_real_escape_string($x)."'";
    }
 
 //Helpfull functions
