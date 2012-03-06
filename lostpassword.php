@@ -29,7 +29,7 @@ if (isset($_POST["act"])) {
 		$result = mysql_query("SELECT email, emailAuthPin FROM webUsers WHERE username='$resetUsername'");
 		if ($row = mysql_fetch_row($result)) {
 			$email = $row[0];
-			mail("$email", "Simplecoin Password Reset Notification","Hello,\n\nTo complete your password reset, please click the following link or copy and paste it into your browser url location:\nhttps://simplecoin.us/lostpassword.php?username=".$resetUsername."&auth=".$row[1]."\n\nIf you have received this message in error or did not request a reset, please ignore this message and your account will remain unchanged.", "From: Simplecoin Notifications <server@simplecoin.us>");
+			mail("$email", $poolname." Password Reset Notification","Hello,\n\nTo complete your password reset, please click the following link or copy and paste it into your browser url location:\nhttps://".$poolname."/lostpassword.php?username=".$resetUsername."&auth=".$row[1]."\n\nIf you have received this message in error or did not request a reset, please ignore this message and your account will remain unchanged.", "From: ".$poolname." Notifications <".$mailfrom.">");
 			$goodMessage = "Your password reset information has been sent to ".$email;
 		} else {
 			$returnError = "We were unable to locate your records, please contact the site admin for further assistance.";

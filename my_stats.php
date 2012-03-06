@@ -15,7 +15,7 @@ ini_set('display_errors', '1');
 echo "<div id=\"stats_wrap\">";
 
 if( !$cookieValid ){
-	echo "<div id=\"new_user_message\"><p>Welcome to <a href=\"/\">Simplecoin.us</a>! Please login or <a href=\"register.php\">join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
+	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$poolname."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
 }
 else
 {
@@ -64,7 +64,7 @@ else
 	// http://www.filamentgroup.com/lab/update_to_jquery_visualize_accessible_charts_with_html5_from_designing_with/
 	// table is hidden, graph follows
 
-	echo "<table id=\"user_hashrate_last24\" class=\"hide\">";
+	echo "\n<br /><table id=\"user_hashrate_last24\" class=\"hide\">";
 	echo "<caption>" . $userInfo->username . "'s Hashrate over the Last 24 Hours</caption>";
 	echo "<thead><tr><td></td>";
 
@@ -87,7 +87,7 @@ else
 		echo "<td>".$resultrow->hashrate."</td>";
 	}
 
-	echo "</tbody></table>";
+	echo "</tbody></table><br />\n";
 
 	//echo "</div><div class=\"clear\"></div><div id=\"stats_wrap_4\" class=\"top_spacing\">";
 
@@ -118,12 +118,12 @@ else
 		echo "<td>" . $resultrow->hashrate . "</td>";
 	}
 
-	echo "</tbody></table>";
+	echo "</tbody></table><br />\n";
 
 	//echo "</div><div class=\"clear\"></div><div id=\"stats_wrap_5\" class=\"top_spacing\">";
 }
 
-echo "<div class=\'clear'></div></div>";
+echo "<div class=\'clear'></div></div><br />\n";
 
 include("includes/footer.php");
 

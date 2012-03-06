@@ -87,7 +87,7 @@ if (isset($_POST["act"])) {
 							mysql_query("UPDATE accountBalance SET balance = '0', paid = '$paid' WHERE userId = $userId");
 							if ($bitcoinController->sendtoaddress($paymentAddress, $currentBalance)) {																									
 							$goodMessage = "You have successfully sent ".$currentBalance." to the following address:".$paymentAddress;
-								mail("$userEmail", "Simplecoin Manual Payout Notification", "Hello,\n\nYour requested manual payout of ". $currentBalance." BTC has been sent to your payment address ".$paymentAddress.".", "From: Simplecoin Notifications <server@simplecoin.us>");
+							mail("$userEmail", $poolname. "Manual Payout Notification", "Hello,\n\nYour requested manual payout of ". $currentBalance." BTC has been sent to your payment address : ".$paymentAddress.".", "From: ".$poolname. " Notifications <".$mailfrom.">");
 							//Set new variables so it appears on the page flawlessly
 							$currentBalance = 0;						
 								mysql_query("COMMIT");

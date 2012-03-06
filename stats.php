@@ -58,7 +58,7 @@ function CoinsPerDay ($time_per_block, $btc_block) {
 <div id="stats_wrap">
 <?php
 if (!$cookieValid){
-	echo "<div id=\"new_user_message\"><p>Welcome to <a href=\"/\">Simplecoin.us</a>! Please login or <a href=\"register.php\">join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
+	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$poolname."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
 }
 ?>
 <div id="stats_members">
@@ -328,7 +328,7 @@ foreach ($result as $resultrow) {
 	echo "<th scope=\"col\">" . $resultrow->date . "</th>";
 }
 
-echo "</thead><tbody><tr><th scope=\"row\">Simplecoin.us Pool</th>";
+echo "</thead><tbody><tr><th scope=\"row\">".$poolname." Pool</th>";
 
 // re-iterate through results
 //mysql_data_seek($result, 0);

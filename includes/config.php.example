@@ -51,8 +51,14 @@ $cookieDomain = "pool.domain.tld"; //Set this to your domain
 $bonusCoins = 1;
 
 //added config options
-$poolname="simplecoin.us";
+$poolname="domain.tld";
 $poolport="8337";
+$btcdonations="1B3e87Mq114UoYnWUtxRe4ua5oARYNSi4C";
+$mailfrom="yourmail@domain.tld";
+$chatroom="#channel";
+$ircserver="webchat.freenode.net";
+
+#paths
 $includedir="/var/www/includes/";
 $backupwalletfilename="/home/simplecoin/walletbackup/wallet.dat";
 
