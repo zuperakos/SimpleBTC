@@ -123,7 +123,7 @@ else
 	//echo "</div><div class=\"clear\"></div><div id=\"stats_wrap_5\" class=\"top_spacing\">";
 }
 
-echo "<div class=\"clear\"></div></div>";
+echo "<div class=\'clear'></div></div>";
 
 include("includes/footer.php");
 
