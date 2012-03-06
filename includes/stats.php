@@ -450,8 +450,8 @@ class Stats {
 			$avgLoad = 0;			
 			$os = strtolower(PHP_OS);		
 			if(strpos($os, "win") === false) {
-				if(file_exists("http://pool.simplecoin.us/loadavg.html")) {
-					$load = file_get_contents("http://pool.simplecoin.us/loadavg.html");
+				if(file_exists("http://".$poolname."/loadavg.html")) {
+					$load = file_get_contents("http://".$poolname."/loadavg.html");
 					$load = explode(' ', $load);
 					$avgLoad = $load[0];
 				} elseif (function_exists("shell_exec")) {

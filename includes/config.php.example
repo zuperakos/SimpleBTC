@@ -61,7 +61,7 @@ $ircserver="webchat.freenode.net";
 #paths
 $includedir="/var/www/includes/";
 $backupwalletfilename="/home/simplecoin/walletbackup/wallet.dat";
-$logopath="images/logo.jpg"
+$logopath="images/logo.jpg";
 
 //Encrypt settings
 $salt = "8fdsfdsfd76s54d777"; //Just type a random series of numbers and letters; set it to anything or any length you want. "You can never have enough salt."

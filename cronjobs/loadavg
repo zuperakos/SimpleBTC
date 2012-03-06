@@ -1,0 +1,1 @@
+*/10 *     * * * cat /proc/loadavg > /path/to/your/pool/html/loadavg.html
