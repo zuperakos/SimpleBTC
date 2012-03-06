@@ -42,7 +42,7 @@ class Settings {
 	//echo $query;
       	mysql_query($query);
 		$this->settingsarray[$settingname] = $value;
-		var_dump($this->settingsarray);
+		//var_dump($this->settingsarray);
 		removeSqlCache("SELECT setting, value FROM settings");
 	}
 }
