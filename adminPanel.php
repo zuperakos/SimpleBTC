@@ -18,6 +18,7 @@
 
 $pageTitle = "- Admin Panel";
 include ("includes/header.php");
+include ("includes/settings.php");
 
 $goodMessage = "";
 $returnError = "";
@@ -27,7 +28,7 @@ if(!$cookieValid || $isAdmin != 1) {
 	header('Location: /');
 	exit;
 }
-
+$settings= new Settings;
 if (isset($_POST["act"]) && isset($_POST["authPin"]))
 {
 	if (isset($_POST["authPin"])) {
@@ -35,7 +36,7 @@ if (isset($_POST["act"]) && isset($_POST["authPin"]))
 	} else {
 		$inputAuthPin = NULL;
 	}
-
+	
 	//Make sure an authPin is set and valid when $act is active
 	if(isset($_POST["act"]) && $authPin == $inputAuthPin) {
 		$act = $_POST["act"];

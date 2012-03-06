@@ -37,9 +37,12 @@ class Settings {
 		if (isset($this->settingsarray[$settingname])) return $this->settingsarray[$settingname];
 	}
 	
-	function setsetting($settingname, $value) {		
-      	mysql_query("UPDATE settings SET value='$value' WHERE setting ='$settingname'");
+	function setsetting($settingname, $value) {
+	$query="UPDATE settings SET value='$value' WHERE setting ='$settingname'";
+	//echo $query;
+      	mysql_query($query);
 		$this->settingsarray[$settingname] = $value;
+		var_dump($this->settingsarray);
 		removeSqlCache("SELECT setting, value FROM settings");
 	}
 }
