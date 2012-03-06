@@ -1,3 +1,7 @@
+*warning* personal fork of simplecoin, work in progress, no guarantees it will work for you, just trying to fix php warnings for empty sets, short open tags . . .  and make it more secure for my own use
+
+---
+
 Simplecoin Web Mining Framework
 
 Requirements:
