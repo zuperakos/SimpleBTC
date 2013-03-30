@@ -23,7 +23,6 @@ SimpleCoin (unmaintained original) Developer: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 
 $pageTitle = "- Admin Panel";
 include ("includes/header.php");
-include ("includes/settings.php");
 
 $goodMessage = "";
 $returnError = "";
