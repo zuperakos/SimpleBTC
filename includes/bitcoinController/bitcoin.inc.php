@@ -435,7 +435,7 @@ class BitcoinClient extends jsonrpc_client {
    * @throws BitcoinClientException
    */
   public function getblocknumber() {
-    return $this->query("getblocknumber");
+    return $this->query("getblockcount");
   }
 
   /**
