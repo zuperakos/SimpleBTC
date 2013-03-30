@@ -20,7 +20,7 @@ Website Reference:http://www.gnu.org/licenses/gpl-2.0.html
 Note From Author: Keep the original donate address in the source files when transferring or redistrubuting this code.
 Please donate at the following address: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 */
-//This page will attempt to take informtion from the user and create an ecrypted session inside of a cookie
+//This page will attempt to take informtion from the user and create an encrypted session inside of a cookie
 
 //Include site functions
 include("includes/requiredFunctions.php");
@@ -83,12 +83,12 @@ if ( !isset( $outputMessage ) ) $outputMessage = "User name dosent exist!";
   <head>
 	<title><?php echo antiXss(outputPageTitle());?> </title>
 	<link rel="stylesheet" href="/css/mainstyle.css" type="text/css" />
-	<meta http-equiv="refresh" content="2;url=/">
+	<meta http-equiv="refresh" content="2;url=index.php">
   </head>
   <body>
 	<div id="pagecontent">
 		<h1><?php echo antiXss($outputMessage); ?><br/>
-		<a href="/">Click here if you continue to see this message</a></h1>
+		<a href="index.php">Click here if you continue to see this message</a></h1>
 	</div>
   </body>
 </html>
