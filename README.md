@@ -1,6 +1,21 @@
-*warning* personal fork of simplecoin, work in progress, no guarantees it will work for you, just trying to fix php warnings for empty sets, short open tags . . .  and make it more secure for my own use
+SimpleBTC
+=========
 
----
+SimpleBTC is a PHP frontend for a pushpool or PoolServerJ-based bitcoin mining
+pool. It is a fork of the Simplecoin frontend, which at start of project had
+been out of development for about a year. Currently the changes consist only
+of bugfixes and minor updates, but the long-term goal is a complete overhaul
+that will make SimpleBTC a modern web-application with database abstraction,
+templating, internationalization, etc.
+
+I have not written install instructions yet, so for now try to get along with
+the original SimpleCoin Readme.
+
+Note that this fork also includes changes to SimpleCoin made by William Waisse
+who is not credited below.
+
+Original SimpleCoin Readme
+--------------------------
 
 Simplecoin Web Mining Framework
 
