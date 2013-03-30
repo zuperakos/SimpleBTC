@@ -20,7 +20,7 @@ if (!isset($_GET["api_key"]))
 	exit;
 	
 include(dirname(__FILE__) . "/include/requiredFunctions.php");
-include($includedir."stats.php");
+include($config['paths']['include']."stats.php");
 $stats = new Stats();
 
 class User {
@@ -70,7 +70,7 @@ if (count($resultU) > 0) {
 		else
 			$estimatedTotalEarnings = $totalUserShares/$bitcoinDifficulty;
 		
-		$estimatedTotalEarnings *= $bonusCoins*(1-$sitePercent); //The expected BTC to be givin out
+		$estimatedTotalEarnings *= $config['bonusCoins']*(1-$sitePercent); //The expected BTC to be givin out
 		$user->estimated_rewards = round($estimatedTotalEarnings, 8);
 		}
 	

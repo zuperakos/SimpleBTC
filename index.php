@@ -23,7 +23,7 @@ include ("includes/header.php");
 
 If you are a new user, please create an account. Then click "Getting Started", and follow the instructions on that page.<br/><br/>
 
-<?php echo $poolname ?> is run completely by opensource software. Even this website is opensource!<br/><br/>
+<?php echo $config['site']['poolname'] ?> is run completely by opensource software. Even this website is opensource!<br/><br/>
 
 We currently have a fee of <?php echo antiXss($settings->getsetting("sitepercent"))?>%, 
 a transaction fee of <?php echo antiXss($settings->getsetting("sitetxfee"))?> BTC per transaction and use 

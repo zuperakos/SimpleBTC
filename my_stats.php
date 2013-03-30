@@ -15,7 +15,7 @@ ini_set('display_errors', '1');
 echo "<div id=\"stats_wrap\">";
 
 if( !$cookieValid ){
-	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$poolname."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
+	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$config['site']['poolname']."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
 }
 else
 {

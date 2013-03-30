@@ -58,7 +58,7 @@ function CoinsPerDay ($time_per_block, $btc_block) {
 <div id="stats_wrap">
 <?php
 if (!$cookieValid){
-	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$poolname."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
+	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$config['site']['poolname']."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
 }
 ?>
 <div id="stats_members">
@@ -91,7 +91,7 @@ foreach ($result as $username => $user_hash_rate) {
 	//$user_hash_rate = $resultrow->hashrate;
 	echo "</td><td>".$username."</td><td>".number_format($user_hash_rate)."</td><td>&nbsp;";
 	$time_per_block = CalculateTimePerBlock($difficulty, $user_hash_rate);
-	$coins_day = CoinsPerDay($time_per_block, $bonusCoins);
+	$coins_day = CoinsPerDay($time_per_block, $config['bonusCoins']);
 	echo number_format( $coins_day, 3 );
 	echo "</td></tr>";
 	if ($rank == 30)
@@ -104,7 +104,7 @@ if ($cookieValid && $user_found == false) {
 	$user_hashrate = $stats->userhashrate($userInfo->username);
 	echo "<tr class=\"user_position\"><td>" . $rank . "</td><td>" . $userInfo->username . "</td><td>" . number_format( $user_hashrate ) . "</td><td>";
 	$time_per_block = CalculateTimePerBlock($difficulty, $user_hashrate);
-	$coins_day = CoinsPerDay($time_per_block, $bonusCoins);
+	$coins_day = CoinsPerDay($time_per_block, $config['bonusCoins']);
 	echo number_format($coins_day, 3) . "</td></tr>";
 }
 ?>
@@ -328,7 +328,7 @@ foreach ($result as $resultrow) {
 	echo "<th scope=\"col\">" . $resultrow->date . "</th>";
 }
 
-echo "</thead><tbody><tr><th scope=\"row\">".$poolname." Pool</th>";
+echo "</thead><tbody><tr><th scope=\"row\">".$config['site']['poolname']." Pool</th>";
 
 // re-iterate through results
 //mysql_data_seek($result, 0);

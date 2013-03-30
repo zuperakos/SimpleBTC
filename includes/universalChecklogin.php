@@ -22,12 +22,12 @@
 $donatePercent = 0;
 
 //Check if the cookie is set, if so check if the cookie is valid
-if(isSet($_COOKIE[$cookieName])){
+if(isSet($_COOKIE[$config['cookie']['Name']])){
 	$cookieValid = false;
 	$ip = $_SERVER['REMOTE_ADDR']; //Get Ip address for cookie validation
 	$validateCookie	= new checkLogin();
-	$cookieValid = $validateCookie->checkCookie(mysql_real_escape_string($_COOKIE[$cookieName]), $ip);
-	$userId	= $validateCookie->returnUserId($_COOKIE[$cookieName]);	
+	$cookieValid = $validateCookie->checkCookie(mysql_real_escape_string($_COOKIE[$config['cookie']['Name']]), $ip);
+	$userId	= $validateCookie->returnUserId($_COOKIE[$config['cookie']['Name']]);	
 	
 	//ensure userId is numeric to prevent sql injection attack
 	if (!is_numeric($userId)) {
@@ -66,7 +66,7 @@ if(isSet($_COOKIE[$cookieName])){
 				$estimatedTotalEarnings = $totalUserShares/$totalOverallShares;
 			else
 				$estimatedTotalEarnings = $totalUserShares/$bitcoinDifficulty;
-			$estimatedTotalEarnings *= $bonusCoins*(1-$sitePercent); //The expected BTC to be givin out
+			$estimatedTotalEarnings *= $config['bonusCoins']*(1-$sitePercent); //The expected BTC to be givin out
 			$userRoundEstimate = round($estimatedTotalEarnings, 8);
 		} 				
 				

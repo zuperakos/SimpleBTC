@@ -25,7 +25,7 @@ include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
 ScriptIsRunLocally();
 
 //Include Block class
-include($includedir."block.php");
+include($config['paths']['include']."block.php");
 $block = new Block();
 
 $siterewardtype = $settings->getsetting("siterewardtype");

@@ -52,7 +52,7 @@ if (isset($_POST["act"])) {
 	$act = $_POST["act"];
 
 	if (isset($_POST["authPin"])) {
-		$inputAuthPin = hash("sha256", $_POST["authPin"].$salt);
+		$inputAuthPin = hash("sha256", $_POST["authPin"].$config['salt']);
 	} else {
 		$inputAuthPin = NULL;
 	}
@@ -87,7 +87,7 @@ if (isset($_POST["act"])) {
 							mysql_query("UPDATE accountBalance SET balance = '0', paid = '$paid' WHERE userId = $userId");
 							if ($bitcoinController->sendtoaddress($paymentAddress, $currentBalance)) {																									
 							$goodMessage = "You have successfully sent ".$currentBalance." to the following address:".$paymentAddress;
-							mail("$userEmail", $poolname. "Manual Payout Notification", "Hello,\n\nYour requested manual payout of ". $currentBalance." BTC has been sent to your payment address : ".$paymentAddress.".", "From: ".$poolname. " Notifications <".$mailfrom.">");
+							mail("$userEmail", $config['site']['poolname']. "Manual Payout Notification", "Hello,\n\nYour requested manual payout of ". $currentBalance." BTC has been sent to your payment address : ".$paymentAddress.".", "From: ".$config['site']['poolname']. " Notifications <".$config['site']['mailfrom'].">");
 							//Set new variables so it appears on the page flawlessly
 							$currentBalance = 0;						
 								mysql_query("COMMIT");
@@ -160,7 +160,7 @@ if (isset($_POST["act"])) {
 					//Change the password only if $newPass == $newPassConfirm
 					if($newPass == $newPassConfirm){
 						//Update hashed password
-						$newHashedPass = hash("sha256", $newPass.$salt);
+						$newHashedPass = hash("sha256", $newPass.$config['salt']);
 						$passchangeSuccess = mysql_query("UPDATE `webUsers` SET `pass` = '".$newHashedPass."' WHERE `id` = '".$userId."'");
 						if($passchangeSuccess){
 							$goodMessage = "Password successfully changed.";

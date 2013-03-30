@@ -19,7 +19,7 @@
 //Include site functions
 include("includes/requiredFunctions.php");
 
-setcookie($cookieName, 0, $timeoutStamp, $cookiePath, $cookieDomain);
+setcookie($config['cookie']['Name'], 0, $timeoutStamp, $config['cookie']['Path'], $config['cookie']['Domain']);
 ?>
 <html>
   <head>

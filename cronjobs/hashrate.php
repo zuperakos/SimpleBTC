@@ -17,7 +17,7 @@
 // 	  BTC Donations: 163Pv9cUDJTNUbadV4HMRQSSj3ipwLURRc
 
 include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
-include($includedir."stats.php");
+include($config['paths']['include']."stats.php");
 $stats = new Stats();
 
 //Check that script is run locally

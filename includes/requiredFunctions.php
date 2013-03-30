@@ -25,16 +25,16 @@ include(dirname(__FILE__) . "/bitcoinController/bitcoin.inc.php");
 $cookieValid = false; //Don't touch leave as: false
 global $memcache;
 $memcache = new Memcached();
-$memcache->addServer($memcache_host,$memcache_port);
+$memcache->addServer($config['memcache']['host'],$config['memcache']['port']);
 
 connectToDb();
 include('settings.php');
 
 //New PDO connection for readaccess (fallback to local if unavailable)
 try {
-$read_only_db = new PDO('mysql:dbname='.$readOnlyDbName.';host='.$readOnlyDbHost.';port='.$readOnlyDbPort, $readOnlyDbUsername, $readOnlyDbPassword);
+$read_only_db = new PDO('mysql:dbname='.$config['readOnlyDb']['Name'].';host='.$config['readOnlyDb']['Host'].';port='.$config['readOnlyDb']['Port'], $config['readOnlyDb']['Username'], $config['readOnlyDb']['Password']);
 } catch (Exception $e) {
-$read_only_db = new PDO('mysql:dbname='.$dbDatabasename.';host='.$dbHost.';port='.$dbPort, $dbUsername, $dbPassword);
+$read_only_db = new PDO('mysql:dbname='.$config['db']['Name'].';host='.$config['db']['Host'].';port='.$config['db']['Port'], $config['db']['Username'], $config['db']['Password']);
 }
 
 $settings = new Settings();
@@ -42,7 +42,7 @@ $settings = new Settings();
 /////////////////////////////////////////////////////////////////////NO NEED TO MESS WITH THE FOLLOWING | FOR DEVELOPERS ONLY///////////////////////////////////////////////////////////////////
 
 //Open a bitcoind connection
-$bitcoinController = new BitcoinClient($rpcType, $rpcUsername, $rpcPassword, $rpcHost, $rpcPort);
+$bitcoinController = new BitcoinClient($config['rpc']['Type'], $config['rpc']['Username'], $config['rpc']['Password'], $config['rpc']['Host'], $config['rpc']['Port']);
 
 //setup bitcoinDifficulty cache object
 $bitcoinDifficulty = GetCachedBitcoinDifficulty();
@@ -51,17 +51,17 @@ $bitcoinDifficulty = GetCachedBitcoinDifficulty();
 
 function connectToDb(){
 	//Set variables to global retireve outside of the scope
-	global $dbHost, $dbUsername, $dbPassword, $dbDatabasename;
+	global $config;
 	
 	//Connect to database
-	mysql_connect($dbHost, $dbUsername, $dbPassword)or die(mysql_error());
-	mysql_select_db($dbDatabasename);
+	mysql_connect($config['db']['Host'], $config['db']['Username'], $config['db']['Password'])or die(mysql_error());
+	mysql_select_db($config['db']['Name']);
 }
 
 class checkLogin
 {
 	function checkCookie($input, $ipaddress){	
-		global $salt;		
+		global $config;		
 		connectToDb();		
 		/*$input comes in the following format userId-passwordhash
 		
@@ -89,7 +89,7 @@ class checkLogin
 			$timeoutStamp	= $getSecret->sessionTimeoutStamp;
 			
 			//Create a variable to test the cookie hash against
-			$hashTest = hash("sha256", $secret.$password.$ipaddress.$timeoutStamp.$salt);
+			$hashTest = hash("sha256", $secret.$password.$ipaddress.$timeoutStamp.$config['salt']);
 			
 			//Test if $hashTest = $cookieInfo[1] hash value; return results
 			if($hashTest == $cookieInfo[1]){		

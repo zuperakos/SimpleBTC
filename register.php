@@ -100,13 +100,13 @@ if (isset($_POST["act"]))
 			//Add user to webUsers
 			$emailAuthPin = genRandomString(10);
 			$secret = genRandomString(10);
-			$apikey = hash("sha256",$username.$salt);
+			$apikey = hash("sha256",$username.$config['salt']);
 			//Check to see if user exists already
 			$testUserQ = mysql_query("SELECT id FROM webUsers WHERE username = '".$username."' LIMIT 1");
 			//If not, create new user
 			if (!$testUserQ || mysql_num_rows($testUserQ) == 0) {			
 				$result = mysql_query("INSERT INTO webUsers (admin, username, pass, email, emailAuthPin, secret, loggedIp, sessionTimeoutStamp, accountLocked, accountFailedAttempts, pin, api_key) 
-										VALUES (0, '$username', '".hash("sha256", $pass.$salt)."', '$email', '$emailAuthPin', '$secret', '0', '0', '0', '0', '".hash("sha256", $authPin.$salt)."','$apikey')");
+										VALUES (0, '$username', '".hash("sha256", $pass.$config['salt'])."', '$email', '$emailAuthPin', '$secret', '0', '0', '0', '0', '".hash("sha256", $authPin.$config['salt'])."','$apikey')");
 				$returnId = mysql_insert_id();
 				mysql_query("INSERT INTO accountBalance (userId, balance) VALUES ($returnId,'0')");
 				mysql_query("INSERT INTO pool_worker (associatedUserId, username, password) VALUES ($returnId,'".$username.".1','x')");

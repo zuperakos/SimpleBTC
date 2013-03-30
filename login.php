@@ -48,7 +48,7 @@ if($userExists > 0){
 		//Check to see if this user has attempted to login more then the maximum allowed failed attempts
 		if($checkPass->accountFailedAttempts < 5){
 			$dbHash = $checkPass->pass;
-			$inputHash = hash("sha256", $pass.$salt);
+			$inputHash = hash("sha256", $pass.$config['salt']);
 			//Do Check
 			if($dbHash == $inputHash){
 				//Give out the secrect SHHH!! be quite too!
@@ -60,8 +60,8 @@ if($userExists > 0){
 			
 				//Set cookie in browser for session
 				$hash		= $checkPass->secret.$dbHash.$ip.$timeoutStamp;
-				$cookieHash = hash("sha256", $hash.$salt);
-				setcookie($cookieName, $checkPass->id."-".$cookieHash, $timeoutStamp, $cookiePath, $cookieDomain);
+				$cookieHash = hash("sha256", $hash.$config['salt']);
+				setcookie($config['cookie']['Name'], $checkPass->id."-".$cookieHash, $timeoutStamp, $config['cookie']['Path'], $config['cookie']['Domain']);
 				$cookieValid = true;
 			
 				//Display output message

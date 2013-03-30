@@ -21,7 +21,7 @@
 include(dirname(__FILE__) . "/../includes/requiredFunctions.php");
 
 //Include Reward class
-include($includedir.'reward.php');
+include($config['paths']['include'].'reward.php');
 $reward = new Reward();
 
 //Check that script is run locally
@@ -30,7 +30,7 @@ ScriptIsRunLocally();
 lock("shares");
 
 	//Include Block class
-	include($includedir."block.php");
+	include($config['paths']['include']."block.php");
 	$block = new Block();
 	
 	//Get current block number
@@ -43,7 +43,7 @@ lock("shares");
 	//Do block work if new block 
 	if ($latestDbBlock < $lastBlockNumber) {		
 		//Insert last block number into networkBlocks
-		include($includedir."stats.php");
+		include($config['paths']['include']."stats.php");
 		$stats = new Stats();
 		$lastwinningid = $stats->lastWinningShareId();
 		$block->InsertNetworkBlocks($lastBlockNumber, $lastwinningid);
@@ -71,13 +71,13 @@ unlock("shares");
 			//Reward by selected type;
 			if ($settings->getsetting("siterewardtype") == 0) {
 				//LastNShares
-				$reward->LastNShares($difficulty, $bonusCoins);
+				$reward->LastNShares($difficulty, $config['bonusCoins']);
 			//} else if ($settings->getsetting("siterewardtype") == 2) {
 				////MaxPPS
 				//MaxPPS();
 			} else {
 				//Proportional Scoring
-				$reward->ProportionalScoring($bonusCoins);
+				$reward->ProportionalScoring($config['bonusCoins']);
 			}
 		} catch (Exception $e) {
 			echo $e->getMessage();

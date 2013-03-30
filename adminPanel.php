@@ -32,7 +32,7 @@ $settings= new Settings;
 if (isset($_POST["act"]) && isset($_POST["authPin"]))
 {
 	if (isset($_POST["authPin"])) {
-		$inputAuthPin = hash("sha256", $_POST["authPin"].$salt);
+		$inputAuthPin = hash("sha256", $_POST["authPin"].$config['salt']);
 	} else {
 		$inputAuthPin = NULL;
 	}
