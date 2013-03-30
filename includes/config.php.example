@@ -53,11 +53,10 @@ $config['cookie']['Domain']      = "example.tld"; // your domain
 //Number of bonus coins to award
 $config['bonusCoins']            = 1;
 
-//added config options
+//Bitcoin pool information
 $config['site']['poolname']      = "bitcoin.nmtbaycon.org";
 $config['site']['poolport']      = "8330";
-$config['site']['btcdonations']  = "16LJ4z5BzZpDTzXBL2n34o8Me6WAM2RhLd"|
-;             
+$config['site']['btcdonations']  = "16LJ4z5BzZpDTzXBL2n34o8Me6WAM2RhLd";             
 $config['site']['mailfrom']      = "jesse@jbcrawford.us";
 
 #paths
