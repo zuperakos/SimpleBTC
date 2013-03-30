@@ -76,7 +76,7 @@ echo "<span class=\"returnMessage\">".antiXss($returnError)."</span>";
 	<h3>General Settings</h3>
 	<hr size="1" width="80%"></hr>
 	<!--Begin main page edits-->
-	<form action="/adminPanel.php" method="post">
+	<form action="adminPanel.php" method="post">
 		<input type="hidden" name="act" value="UpdateMainPageSettings">
 		Page Title <input type="text" name="pageTitle" value="<?php echo antiXss($settings->getsetting("pagetitle"));?>"><br/>
 		Header Title <input type="text" name="headerTitle" value="<?php echo antiXss($settings->getsetting("websitename"));?>"><br/>
