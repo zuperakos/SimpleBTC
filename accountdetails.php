@@ -237,7 +237,7 @@ echo "<span class=\"goodMessage\">".$goodMessage."</span><br/>";
 echo "<span class=\"returnMessage\">".$returnError."</span>";
 ?>
 <b><u>Account Details</u></b><br/>
-<form action="/accountdetails.php" method="post"><input type="hidden" name="act" value="updateDetails">
+<form action="accountdetails.php" method="post"><input type="hidden" name="act" value="updateDetails">
 <table>
 	<tr><td>Username: </td><td><?php echo antiXss($userInfo->username);?></td></tr>
 	<tr><td>User Id: </td><td><?php echo antiXss($userId); ?></td></tr>
@@ -255,7 +255,7 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 <br />
 <b><u>Cash Out</u></b><br/>
 <?php if ($settings->getsetting("sitetxfee") > 0) {?><i>(Please note: a <?php echo $settings->getsetting("sitetxfee")?> btc transaction fee is required by the bitcoin client for processing)</i><br/><?php } ?>
-<form action="/accountdetails.php" method="post">
+<form action="accountdetails.php" method="post">
 <input type="hidden" name="act" value="cashOut">
 <table>
 	<tr><td>Account Balance: </td><td><?php echo antiXss($currentBalance); ?></td></tr>
@@ -267,7 +267,7 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 <br />
 
 <b><u>Change Password</u></b><br/>
-<form action="/accountdetails.php" method="post"><input type="hidden" name="act" value="updatePassword">
+<form action="accountdetails.php" method="post"><input type="hidden" name="act" value="updatePassword">
 <table>
 	<tr><td>Current Password: </td><td><input type="password" name="currentPassword" autocomplete="off"></td></tr>
 	<tr><td>New Password: </td><td><input type="password" name="newPassword" autocomplete="off" ></td></tr>
@@ -287,7 +287,7 @@ echo "<span class=\"returnMessage\">".$returnError."</span>";
 $getWorkers = mysql_query("SELECT id, username, password FROM pool_worker WHERE associatedUserId = $userId");
 while($worker = mysql_fetch_array($getWorkers)){
 ?>
-<form action="/accountdetails.php" method="post">
+<form action="accountdetails.php" method="post">
 <input type="hidden" name="workerId" value="<?php echo $worker["id"]?>">
 <?php
 	//Display worker information and the forms to edit or update them
@@ -308,7 +308,7 @@ while($worker = mysql_fetch_array($getWorkers)){
 }
 ?>
 </table>
-<form action="/accountdetails.php" method="post"><input type="hidden"
+<form action="accountdetails.php" method="post"><input type="hidden"
 	name="act" value="addWorker"><!--  AuthPin:<input type="password"
 	name="authPin" size="4" maxlength="4"><br /> -->
 <?php echo antiXss($userInfo->username);?>.<input type="text" name="username"

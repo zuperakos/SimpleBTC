@@ -100,7 +100,7 @@ else $pageTitle = outputPageTitle(). " ". $pageTitle;
 					<td>Balance: <?php echo $currentBalance; ?> BTC</td>					
 				</tr>
 				<?php } else { ?>
-				<form action="/login.php" method="post" id="loginForm">
+				<form action="login.php" method="post" id="loginForm">
 				<tr>													
 					<td colspan="5">Login: 
 					<input type="text" name="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Username':this.value;" value="username" /> 
