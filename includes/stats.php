@@ -103,14 +103,16 @@ class Stats {
 				$currenthashrate = $resultrow[0];
 				$currenthashrate = round((($currenthashrate*4294967296)/590)/1000000, 0);
 				setCache("pool_hashrate", $currenthashrate, 300);
-				try {
-					$fileName = $apidir."pool/speed";
-					$fileHandle = fopen($fileName, 'w');
-					fwrite($fileHandle, ($currenthashrate/1000));
-					fclose($fileHandle);
-				} catch (Exception $e) {
-					//echo $e->getMessage();
-				}
+				
+				// TODO: look into restoring this functionality in a better way
+				//try {
+				//	$fileName = $apidir."pool/speed";
+				//	$fileHandle = fopen($fileName, 'w');
+				//	fwrite($fileHandle, ($currenthashrate/1000));
+				//	fclose($fileHandle);
+				//} catch (Exception $e) {
+				//	//echo $e->getMessage();
+				//}
 			}
 		}
 		return $currenthashrate;
@@ -464,7 +466,8 @@ class Stats {
 		return $last;
 	}
 	
-	function get_server_load($windows = 0) {			
+	function get_server_load($windows = 0) {	
+		global $config;		
 		$serverload = "n/a";
 		if (!($serverload = getCache("pool_load"))) {
 			$numberOfCores = 8;

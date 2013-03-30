@@ -35,6 +35,8 @@ connectToDb();
 include('settings.php');
 
 //New PDO connection for readaccess (fallback to local if unavailable)
+//TODO: get rid of this check, because if opening readonly is not valid
+//it will run until timeout, making each pageload take 60s
 try {
 $read_only_db = new PDO('mysql:dbname='.$config['readOnlyDb']['Name'].';host='.$config['readOnlyDb']['Host'].';port='.$config['readOnlyDb']['Port'], $config['readOnlyDb']['Username'], $config['readOnlyDb']['Password']);
 } catch (Exception $e) {
