@@ -24,6 +24,7 @@ You will first need the following prerequites:
 * bitcoind and pushpool installed and configured
 * PHP, tested under 5.2 but will likely work for many versions
 * MySQL (more RDBMS to be supported in the future)
+* Memcached
 * PHP MySQL bindings
 
 Note that SimpleBTC will provide a database schema for pushpool, so don't
