@@ -52,7 +52,7 @@ class Reward {
 		}
 	}
 	
-	function LastNShares($difficulty, $config['bonusCoins']) {
+	function LastNShares($difficulty, $bonusCoins) {
 		global $settings;
 		$overallreward = 0;
 		$blocksQ = mysql_query("SELECT share_id, blockNumber from winning_shares WHERE scored = 'N' ORDER BY id ASC");
@@ -74,7 +74,7 @@ class Reward {
 			mysql_query("BEGIN");
 			try {
 				while ($sharesR = mysql_fetch_object($sharesQ)) {
-					$totalReward = $sharesR->shares/$shareLimit*$config['bonusCoins'];
+					$totalReward = $sharesR->shares/$shareLimit*$bonusCoins;
 					$userid = $sharesR->id;
 					$totalReward = $totalReward * 100000000;
 					$totalReward = floor($totalReward);
@@ -98,7 +98,7 @@ class Reward {
 		}
 	}
 	
-	function ProportionalScoring($config['bonusCoins']) {	
+	function ProportionalScoring($bonusCoins) {	
 		//Go through all of shares that are uncounted shares; Check if there are enough confirmed blocks to award user their BTC
 		$overallReward = 0;
 		$lastrewarded = 0;
@@ -126,7 +126,7 @@ class Reward {
 						$username = $userListCountR->username;
 						$uncountedShares = $userListCountR->id;
 						$shareRatio = $uncountedShares/$totalRoundShares;
-						$predonateAmount = $config['bonusCoins']*$shareRatio;				
+						$predonateAmount = $bonusCoins*$shareRatio;				
 									
 						//get owner userId and donation percent
 						$ownerIdQ = mysql_query("SELECT p.associatedUserId, u.donate_percent FROM pool_worker p, webUsers u WHERE u.id = p.associatedUserId AND p.username = '$username' LIMIT 0,1");

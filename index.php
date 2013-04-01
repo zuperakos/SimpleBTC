@@ -24,7 +24,7 @@ SimpleCoin (unmaintained original) Developer: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 include ("includes/header.php");
 ?>
 
-<h1>Welcome to SimpleCoin.us</h1> <br/>
+<h1><?php echo outputHeaderTitle() ?></h1> <br/>
 
 If you are a new user, please create an account. Then click "Getting Started", and follow the instructions on that page.<br/><br/>
 
