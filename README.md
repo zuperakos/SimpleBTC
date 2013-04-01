@@ -26,6 +26,9 @@ You will first need the following prerequites:
 * MySQL (more RDBMS to be supported in the future)
 * PHP MySQL bindings
 
+Note that SimpleBTC will provide a database schema for pushpool, so don't
+worry about setting up a database for it yet.
+
 Then, see INSTALL.md for install instructions.
 
 Contribute
