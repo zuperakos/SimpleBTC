@@ -8,41 +8,47 @@ of bugfixes and minor updates, but the long-term goal is a complete overhaul
 that will make SimpleBTC a modern web-application with database abstraction,
 templating, internationalization, etc.
 
-I have not written install instructions yet, so for now try to get along with
-the original SimpleCoin Readme.
+Features
+--------
 
-Note that this fork also includes changes to SimpleCoin made by William Waisse
-who is not credited below.
+* User and worker management
+* User and pool statistics
+* Payout calculation and payments
+* Basically everything you need to start a mining pool
 
-Original SimpleCoin Readme
---------------------------
+Install
+-------
 
-Simplecoin Web Mining Framework
+You will first need the following prerequites:
 
-Requirements:
-Simplecoin relies on an existing and working bitcoin and pushpool installation. Before attempting to run simplecoin, please setup the following.
-Bitcoin: bitcoin.org
-Pushpool: http://forum.bitcoin.org/index.php?topic=8707.0
+* bitcoind and pushpool installed and configured
+* PHP, tested under 5.2 but will likely work for many versions
+* MySQL (more RDBMS to be supported in the future)
+* PHP MySQL bindings
 
+Then, see INSTALL.md for install instructions.
 
-Installation:
-1. Extract files into web root directory
-2. Create simplecoin database in you mysql instance
-3. Run simplecoin.sql in your simplecoin database (This will be used for pushpool & simplcoin)
-4. Edit includes/requiredFunctions.php and set the bitcoin & database login info
-5. Edit all files in the cronjob folder, set $includesDirectory to the correct server path.
-6. setup cronjobs on a staggered schedule. I recommend 10-30 minutes for most. I run payout twice daily.
+Contribute
+----------
 
-This project is the culmination of creation and contribution by the following Authors:
-Mike Allison (Simplecoin base): dj.mikeallison@gmail.com : 163Pv9cUDJTNUbadV4HMRQSSj3ipwLURRc
-Xenland (Miner Pool original fork): 12QY5HYbiT5Nx6fek8ss5pAywPsV3kqdu3
-Wayno (Ozco.in contributions): 1Gzcbs8dDYzf16qFWKHc5kWKuH8nji3pVt
-Tom Lightspeed : tomlightspeed@gmail.com : 16p56JHwLna29dFhTRcTAurj4Zc2eScxTD
-Please remember to include credit from previous authors in all forks and derivative works.
+SimpleBTC source and issue tracking are at online at
+https://github.com/jcrawfordor/SimpleBTC. Please report problems, request
+features, etc via the issue tracker there. Feel free to write some code
+yourself!
 
-Thanks!
+Credits
+-------
 
-[![endorse](http://api.coderwall.com/neofutur/endorsecount.png)](http://coderwall.com/neofutur)
+SimpleBTC is developed and maintained by Jesse B. Crawford,
+http://jbcrawford.us. Donations are appreciated and can be directed to
+17tTDgcgXBTN8u9VeBFQZ2KV5pDHCKvXjr. Perhaps consider donating some cycles
+to his small pool at http://bitcoin.nmtbaycon.org/.
 
-"!http://api.coderwall.com/neofutur/endorsecount.png!":http://coderwall.com/neofutur
+SimpleBTC is based on the now defunct SimpleCoin project, developed by Mike
+Allison (dj.mikeallison@gmail.com, 163Pv9cUDJTNUbadV4HMRQSSj3ipwLURRc),
+Wayno (1Gzcbs8dDYzf16qFWKHc5kWKuH8nji3pVt), and Tom Lightspeed
+(tomlightspeed@gmail.com, 16p56JHwLna29dFhTRcTAurj4Zc2eScxTD). Patches to
+SimpleCoin by William Waisse are additionally included in SimpleBTC.
 
+SimpleCoin was in turn based on Miner Pool by Xenland
+(12QY5HYbiT5Nx6fek8ss5pAywPsV3kqdu3).
