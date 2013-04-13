@@ -47,7 +47,7 @@ $config['readOnlyDb']['Name']    = "pool";
 
 //Cookie settings | More Info @ http://us.php.net/manual/en/function.setcookie.php
 $config['cookie']['Name']        = "poolcookie";
-$config['cookie']['Path']	 = "/"
+$config['cookie']['Path']	 = "/";
 $config['cookie']['Domain']      = "example.tld"; // your domain
 
 //Number of bonus coins to award
