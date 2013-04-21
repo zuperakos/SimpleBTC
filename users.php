@@ -33,8 +33,9 @@ if(!$cookieValid || $isAdmin != 1) {
 	header('Location: /');
 	exit;
 }
-	$show = (isset($_GET['show']) ? $_GET['show'] : 'main');
-	else  $show =""; 
+else  $show =""; 
+$show = (isset($_GET['show']) ? $_GET['show'] : 'main');
+
 	if ( isset( $_POST['searchUsername'] ) ) $searchUsername = $_POST['searchUsername'];
 	else $searchUsername="";
 
