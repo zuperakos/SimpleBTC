@@ -24,47 +24,48 @@ SimpleCoin (unmaintained original) Developer: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 // rename this file to config.php to make it work
 
 //RPC Bitcoind Client Information
-$config['rpc']['Type']           = "http"; // http or https
-$config['rpc']['Username']       = "bitcoinrpc";
-$config['rpc']['Password']       = "secretpass";
-$config['rpc']['Host']           = "localhost";
-$config['rpc']['Port']           = 8332;
+$config['rpc']['Type']            = "http"; // http or https
+$config['rpc']['Username']        = "bitcoinrpc";
+$config['rpc']['Password']        = "secretpass";
+$config['rpc']['Host']            = "localhost";
+$config['rpc']['Port']            = 8332;
 
 //Login to Mysql with the following
-$config['db']['Host']            = "localhost";
-$config['db']['Username']        = "pool";
-$config['db']['Password']        = "secretpassword";
-$config['db']['Port']            = "3306";
-$config['db']['Name']            = "pool";
+$config['db']['Host']             = "localhost";
+$config['db']['Username']         = "pool";
+$config['db']['Password']         = "secretpassword";
+$config['db']['Port']             = "3306";
+$config['db']['Name']             = "pool";
 
 //Replicated Database calls for read intensive queries 
 //set to above if only 1 database
-$config['readOnlyDb']['Host']    = "localhost";
+$config['readOnlyDb']['Host']     = "localhost";
 $config['readOnlyDb']['Username'] = "pool";
 $config['readOnlyDb']['Password'] = "secretpassword";
-$config['readOnlyDb']['Port']    = "3306";
-$config['readOnlyDb']['Name']    = "pool";
-
-//Cookie settings | More Info @ http://us.php.net/manual/en/function.setcookie.php
-$config['cookie']['Name']        = "poolcookie";
-$config['cookie']['Path']	 = "/";
-$config['cookie']['Domain']      = "example.tld"; // your domain
+$config['readOnlyDb']['Port']     = "3306";
+$config['readOnlyDb']['Name']     = "pool";
 
 //Number of bonus coins to award
-$config['bonusCoins']            = 1;
+$config['bonusCoins']             = 1;
 
 //Bitcoin pool information
-$config['site']['poolname']      = "bitcoin.nmtbaycon.org";
-$config['site']['poolport']      = "8330";
-$config['site']['btcdonations']  = "16LJ4z5BzZpDTzXBL2n34o8Me6WAM2RhLd";             
-$config['site']['mailfrom']      = "jesse@jbcrawford.us";
+$config['site']['poolname']       = "bitcoin.nmtbaycon.org";
+$config['site']['poolport']       = "8330";
+$config['site']['btcdonations']   = "16LJ4z5BzZpDTzXBL2n34o8Me6WAM2RhLd";             
+$config['site']['mailfrom']       = "jesse@jbcrawford.us";
 
 #paths
-$config['paths']['include']      = "/var/www-bitcoin/SimpleBTC/includes/";
-$config['paths']['backupwallet'] = "/var/bitcoin/walletbackup/wallet.dat";
+$config['paths']['siteprefix']    = "/"; //this must have a leading slash
+$config['paths']['include']       = "/var/www".$config['paths']['siteprefix']."/includes/";
+$config['paths']['backupwallet']  = "/var/bitcoin/walletbackup/wallet.dat";
+
+//Cookie settings | More Info @ http://us.php.net/manual/en/function.setcookie.php
+$config['cookie']['Name']         = "poolcookie";
+$config['cookie']['Path']         = $config['paths']['siteprefix']."/";
+$config['cookie']['Domain']       = "example.tld"; // your domain
 
 //Encrypt settings
-$config['salt']                  = "123483jd7Dg6h5s92k";
+$config['salt']                   = "123483jd7Dg6h5s92k";
 //Just type a random series of numbers and letters; set it to anything
 
 $config['memcache']['host']      = "localhost";
