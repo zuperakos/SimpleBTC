@@ -93,7 +93,7 @@ else $pageTitle = outputPageTitle(). " ". $pageTitle;
 					<td>Round Shares: <?php echo $stats->currentshares();?></td>
 					<?php } ?>
 					<td>Server Load: <?php print $stats->get_server_load(); ?></td>
-					<td><a href="http://www.mtgox.com" target="_blank" style="color: #FFF">MtGox (USD):</a> $<?php print $stats->mtgoxlast(); ?></td>					
+					<td><a href="http://www.mtgox.com" target="_blank" style="color: #FFF">MtGox (USD):</a> <?php print $stats->mtgoxlast(); ?></td>					
 				</tr>
 				<?php if ($cookieValid) {	?>				
 				<tr>					

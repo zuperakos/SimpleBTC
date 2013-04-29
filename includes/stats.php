@@ -452,15 +452,25 @@ class Stats {
 	}
 	
 	function mtgoxlast () {
+		//https://data.mtgox.com/api/2/BTCUSD/money/ticker
 		$last = "n/a";
 		if (!($last = getCache("mtgox_last"))) {
-			include('includes/mtgox.php');
 			try {
-				$mtgox = new mtgox("", "");
-				$ticker = $mtgox->ticker();
-				if (intval($ticker['last']) > 0) 
-					$last = round(floatval($ticker['last']),2);
-			} catch (Exception $e) { }		
+				$ticker_url = "https://data.mtgox.com/api/2/BTCUSD/money/ticker";
+				$ticker_contents = file_get_contents($ticker_url);
+				$ticker_string = explode(',"last":',$ticker_contents);
+				$ticker_string = explode(',"buy":',$ticker_string[1]);
+				$ticker_string = trim($ticker_string[0], '{}');
+				$ticker_string = explode(",",$ticker_string);
+				
+				foreach($ticker_string as $data) {
+					$temp = explode(":",$data);
+					$ticker_array[trim($temp[0],'"')] = trim($temp[1],'"');
+				}
+				
+				if (intval($ticker_array['value']) > 0) 
+					$last = $ticker_array['display'];
+			} catch (Exception $e) { }
 			setCache("mtgox_last", $last, 1800);
 		}
 		return $last;
