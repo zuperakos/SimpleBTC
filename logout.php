@@ -29,13 +29,13 @@ setcookie($config['cookie']['Name'], 0, $timeoutStamp, $config['cookie']['Path']
 <html>
   <head>
 	<title><?php echo antiXss(outputPageTitle());?> </title>
-	<link rel="stylesheet" href="/css/mainstyle.css" type="text/css" />
-	<meta http-equiv="refresh" content="2;url=/">
+	<link rel="stylesheet" href="css/mainstyle.css" type="text/css" />
+	<meta http-equiv="refresh" content="2;url=.">
   </head>
   <body>
 	<div id="pagecontent">
 		<h1>You have been logged out<br/>
-		<a href="/">Click here if you continue to see this message</a></h1>
+		<a href="">Click here if you continue to see this message</a></h1>
 	</div>
   </body>
 </html>

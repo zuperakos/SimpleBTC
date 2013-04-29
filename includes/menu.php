@@ -1,5 +1,5 @@
 <div id="menuBar">
-	<img style="float:left;" alt="" src="/images/menu_left.png"/>
+	<img style="float:left;" alt="" src="images/menu_left.png"/>
 	<ul id="menu">
 		<li><a href="index.php">Home</a></li>
 		<?php if (!$cookieValid) {	?>
@@ -15,6 +15,6 @@
 		<li><a href="gettingstarted.php">Getting Started</a></li>
 		<li><a href="about.php">About</a></li>
 	</ul>
-	<img style="float:left;" alt="" src="/images/menu_right.png"/>
+	<img style="float:left;" alt="" src="images/menu_right.png"/>
 </div>
 <div style="float:none; clear:both;"></div>

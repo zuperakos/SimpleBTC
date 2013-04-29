@@ -31,21 +31,21 @@ SimpleCoin (unmaintained original) Developer: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 $pageTitle = "- My Stats";
 include ("includes/header.php");
 
-//DELETE
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//DEBUG
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 echo "<div id=\"stats_wrap\">";
 
 if( !$cookieValid ){
-	echo "<div id='new_user_message'><p>Welcome to <a href='/'>".$config['site']['poolname']."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
+	echo "<div id='new_user_message'><p>Welcome to <a href=''>".$config['site']['poolname']."</a>! Please login or <a href='register.php'>join us</a> to get detailed stats and graphs relating to your hashing!</p></div>";
 }
 else
 {
 	// SHOW USER TOTAL PAID  *************************************************************************************************************************
 
 	echo "<table class=\"money_table server_width\">";
-	echo "<tr><th scope=\"col\" colspan=\"2\">Total BTC Earned</th></tr><tr class=\"moneyheader\"><td class=\"bitcoin_image\"><img class=\"earned_coin\" src=\"/images/bitcoin.png\" /></td><td class=\"bitcoins\">";
+	echo "<tr><th scope=\"col\" colspan=\"2\">Total BTC Earned</th></tr><tr class=\"moneyheader\"><td class=\"bitcoin_image\"><img class=\"earned_coin\" src=\"images/bitcoin.png\" /></td><td class=\"bitcoins\">";
 
 	$result = mysql_query_cache("SELECT paid + balance as amount_earned  FROM accountBalance WHERE userid = $userInfo->id");
 	if ($resultrow = $result[0]) {

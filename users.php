@@ -105,7 +105,7 @@ if($show == "searchUsers"){
 				<?php
 					}
 					//Output Footer
-					if ( isset ( $footer ) ) include($footer);
+					include("includes/footer.php");
 					///////////////
 				?>
 			</div>

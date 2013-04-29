@@ -21,6 +21,10 @@ SimpleBTC (overhaul) Developer: 16LJ4z5BzZpDTzXBL2n34o8Me6WAM2RhLd
 SimpleCoin (unmaintained original) Developer: 1Fc2ScswXAHPUgj3qzmbRmwWJSLL2yv8Q
 */
 
+//DEBUG
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
+
 include ("includes/header.php");
 ?>
 

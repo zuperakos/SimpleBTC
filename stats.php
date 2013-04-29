@@ -91,7 +91,7 @@ foreach ($result as $username => $user_hash_rate) {
 	echo "<td>".$rank;
 
 	if ($rank == 1) {
-		echo "&nbsp;<img src=\"/images/crown.png\" />";
+		echo "&nbsp;<img src=\"images/crown.png\" />";
 	}
 
 	//$user_hash_rate = $resultrow->hashrate;
@@ -187,7 +187,7 @@ foreach ($result as $username => $shares) {
 	echo "<td>" . $rank;
 	
 	if ($rank == 1) 
-		echo "&nbsp;<img src=\"/images/crown.png\" />";
+		echo "&nbsp;<img src=\"images/crown.png\" />";
 	
 	echo "</td><td>".$username."</td><td>" . number_format($shares) . "</td></tr>";
 	$rank++;

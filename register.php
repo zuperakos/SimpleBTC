@@ -128,7 +128,7 @@ echo "<span class=\"goodMessage\">".antiXss($goodMessage)."</span><br/>";
 echo "<span class=\"returnMessage\">".antiXss($returnError)."</span>";
 
 ?>
-<form action="/register.php" method="post">
+<form action="register.php" method="post">
 	<h2>Join our pool</h2>						
 	<input type="hidden" name="act" value="attemptRegister">
 	<table border="0">

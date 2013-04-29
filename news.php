@@ -62,4 +62,6 @@ echo "News<br>";
 echo "<textarea name=news rows=10 cols=80>" . htmlspecialchars($row["message"]) . "</textarea>";
 echo "<br><input type=submit value=Submit>";
 echo "</form>";
+
+include("includes/footer.php");
 ?>

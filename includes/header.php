@@ -97,7 +97,7 @@ else $pageTitle = outputPageTitle(). " ". $pageTitle;
 				</tr>
 				<?php if ($cookieValid) {	?>				
 				<tr>					
-					<td><?php echo $userInfo->username; ?> <a href="/logout.php" style="color: #FFF"><span style="font-size:small">(logout)</span></a></td>
+					<td><?php echo $userInfo->username; ?> <a href="logout.php" style="color: #FFF"><span style="font-size:small">(logout)</span></a></td>
 					<td>Hashrate: <?php print $stats->userhashrate($userInfo->username); ?> MH/s</td>
 					<td>Workers: <?php echo count($stats->workers($userInfo->id)); ?></td>
 					<td>Round Shares: <?php echo $totalUserShares; ?> (<?php if ($totalUserShares >0 )  echo round(($stats->userstalecount($userId) / $totalUserShares * 100),1); ?>% stale)</td>
@@ -111,7 +111,7 @@ else $pageTitle = outputPageTitle(). " ". $pageTitle;
 					<input type="text" name="username" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Username':this.value;" value="username" /> 
 					<input type="password" name="password" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'password':this.value;" value="password" />
 					<input type="submit" value="LOGIN">
-					<a href="/lostpassword.php" style="color: #FFF"><span style="font-size: small">Lost Password</span></a>
+					<a href="lostpassword.php" style="color: #FFF"><span style="font-size: small">Lost Password</span></a>
 					</td>	
 				</tr>
 				</form>			

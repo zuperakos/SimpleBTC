@@ -117,7 +117,7 @@ echo "<span class=\"returnMessage\">".antiXss($returnError)."</span>";
 	<br/><br/>
 	<h3>Users Control</h3>
 	<hr size="1" width="80%"></hr>
-	<a href=users.php style="color: blue">Show USers</a>
+	<a href=users.php style="color: blue">Show Users</a>
 </div>
 
 <?include ("includes/footer.php");?>

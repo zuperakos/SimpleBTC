@@ -84,7 +84,7 @@ if ( !isset( $outputMessage ) ) $outputMessage = "User name dosent exist!";
 <html>
   <head>
 	<title><?php echo antiXss(outputPageTitle());?> </title>
-	<link rel="stylesheet" href="/css/mainstyle.css" type="text/css" />
+	<link rel="stylesheet" href="css/mainstyle.css" type="text/css" />
 	<meta http-equiv="refresh" content="2;url=index.php">
   </head>
   <body>

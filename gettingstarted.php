@@ -43,7 +43,7 @@ You will need to download and install the AMD Stream SDK from  <a href="http://d
 
 	<b><u>Easy Windows</u></b><br/>	
 	Download GUIMiner: <a href="https://forum.bitcoin.org/index.php?topic=3878.0" target="_blank">HERE</a><br>
-	<img src="/images/guiminer.jpg"><br/>
+	<img src="images/guiminer.jpg"><br/>
 	<u>GUIMiner options</u><br/>
 	Server: Other<br />
 	Host: <?php echo $config['site']['poolname'] ?><br />
